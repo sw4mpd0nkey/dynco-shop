@@ -69,7 +69,7 @@ namespace PlatformService
 
             });
 
-
+            PrepDb.PrepPopulation(app);
         }
 
 
