@@ -3,37 +3,35 @@ using System.Collections.Generic;
 using System.Linq;
 using PlatformService.Models;
 
-namespace PlatformService.Data
+namespace PlatformService.Data;
+
+public class PlatformRepo(AppDbContext context) : IPlatformRepo
 {
-    public class PlatformRepo(AppDbContext context) : IPlatformRepo
+    private readonly AppDbContext _context = context;
+
+    public void CreatePlatform(Platform platform)
     {
-        private readonly AppDbContext _context = context;
-
-        public void CreatePlatform(Platform platform)
+        if (platform == null)
         {
-            if (platform == null)
-            {
-                throw new ArgumentNullException(nameof(platform));
-            }
-
-            _context.Platforms.Add(platform);
-
+            throw new ArgumentNullException(nameof(platform));
         }
 
-        public IEnumerable<Platform> GetAllPlatforms()
-        {
-            return [.. _context.Platforms];
-        }
+        _context.Platforms.Add(platform);
 
-        public Platform GetPlatformById(int id)
-        {
-            return _context.Platforms.FirstOrDefault(p => p.Id == id);
-        }
-
-        public bool SaveChanges()
-        {
-            return (_context.SaveChanges() >= 0);
-        }
     }
 
+    public IEnumerable<Platform> GetAllPlatforms()
+    {
+        return [.. _context.Platforms];
+    }
+
+    public Platform GetPlatformById(int id)
+    {
+        return _context.Platforms.FirstOrDefault(p => p.Id == id);
+    }
+
+    public bool SaveChanges()
+    {
+        return (_context.SaveChanges() >= 0);
+    }
 }
