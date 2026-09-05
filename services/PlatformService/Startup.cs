@@ -23,18 +23,18 @@ public class Startup
 
     public void ConfigureServices(IServiceCollection services)
     {
-        if (_env.IsProduction())
-        {
-            Console.WriteLine("--> Using SqlServer Db");
-            services.AddDbContext<AppDbContext>(opt =>
-                opt.UseSqlServer(Configuration.GetConnectionString("PlatformsConn")));
-        }
-        else
-        {
+       // if (_env.IsProduction())
+       // {
+       //     Console.WriteLine("--> Using SqlServer Db");
+       //     services.AddDbContext<AppDbContext>(opt =>
+       //         opt.UseSqlServer(Configuration.GetConnectionString("PlatformsConn")));
+        //}
+        //else
+       // {
             Console.WriteLine("--> Using InMem Db");
             services.AddDbContext<AppDbContext>(opt =>
                  opt.UseInMemoryDatabase("InMem"));
-        }
+        //}
 
         services.AddScoped<IPlatformRepo, PlatformRepo>();
 
@@ -47,12 +47,12 @@ public class Startup
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     {
-        if (env.IsDevelopment())
-        {
+       // if (env.IsDevelopment())
+       // {
             app.UseDeveloperExceptionPage();
             app.UseSwagger();
             app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "PlatformService v1"));
-        }
+        //}
 
         //app.UseHttpsRedirection();
 
