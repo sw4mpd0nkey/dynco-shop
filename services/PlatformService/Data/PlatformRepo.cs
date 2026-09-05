@@ -7,7 +7,6 @@ namespace PlatformService.Data;
 
 public class PlatformRepo(AppDbContext context) : IPlatformRepo
 {
-    private readonly AppDbContext _context = context;
 
     public void CreatePlatform(Platform platform)
     {
@@ -16,22 +15,22 @@ public class PlatformRepo(AppDbContext context) : IPlatformRepo
             throw new ArgumentNullException(nameof(platform));
         }
 
-        _context.Platforms.Add(platform);
+        context.Platforms.Add(platform);
 
     }
 
     public IEnumerable<Platform> GetAllPlatforms()
     {
-        return [.. _context.Platforms];
+        return [.. context.Platforms];
     }
 
     public Platform GetPlatformById(int id)
     {
-        return _context.Platforms.FirstOrDefault(p => p.Id == id);
+        return context.Platforms.FirstOrDefault(p => p.Id == id);
     }
 
     public bool SaveChanges()
     {
-        return (_context.SaveChanges() >= 0);
+        return (context.SaveChanges() >= 0);
     }
 }
