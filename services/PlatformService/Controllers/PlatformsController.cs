@@ -22,4 +22,20 @@ public class PlatformController(IPlatformRepo platformRepo, IMapper mapper) : Co
         return Ok(mapper.Map<IEnumerable<PlatformReadDto>>(platformItems));
     }
 
+    [HttpGet("{id}", Name = "GetPlatformById")]
+    public ActionResult<PlatformReadDto> GetPlatformById(int id)
+    {
+        var platformItem = platformRepo.GetPlatformById(id);
+        if (platformItem == null)
+        {
+            return NotFound();
+        }
+        else
+        {
+            return Ok(mapper.Map<PlatformReadDto>(platformItem));
+        }
+
+    }
+
+
 }
