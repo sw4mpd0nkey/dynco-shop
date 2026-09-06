@@ -2,3 +2,7 @@
 
 ## Running Directly
 docker run -p 8080:8080 -d sw4mpd0nkey/platformservice
+
+then can acces via:
+- http://localhost:8080/api/platform
+- http://[::1]:8080/api/platform
