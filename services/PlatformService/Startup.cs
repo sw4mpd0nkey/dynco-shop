@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi;
 using PlatformService.Data;
+using PlatformService.SyncDataServices.Http;
 
 namespace PlatformService;
 
@@ -37,6 +38,8 @@ public class Startup
         //}
 
         services.AddScoped<IPlatformRepo, PlatformRepo>();
+
+        services.AddHttpClient<ICommandDataClient, HttpCommandDataClient>();
 
         services.AddControllers();
         services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
